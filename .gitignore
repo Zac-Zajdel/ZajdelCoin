@@ -1,3 +1,4 @@
 /secrets.txt
+.vscode
 blockchain-env
 *__pycache__*

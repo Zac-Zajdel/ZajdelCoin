@@ -4,16 +4,25 @@
 
 ##### TODO:
 
-1. Continue To learn about cryptocurrency ideologies
-2. Create Wallet
-3. Allow For Transaction
-4. Create Frontend with React, Redux
-5. Get real-time data about Bitcoin, Ethereum, etc... from API.
+1. Make ZajdelCoin allow collaboration.
+2. Build Blockchain Network
+3. Allow For Transaction / Wallets / Keys
+4. Connect ZajdelCoin and Blockchain
+5. Create Front-end with React, Redux
+6. Get real-time data about Bitcoin, Ethereum, etc... from API.
 
 **Activate the virtual machine**
 
 - blockchain-env\Scripts\activate.bat
 
+**Executing a module**
+
+- python -m PATH.PATH.PATH....
+
 **Install all packages**
 
 - pip3 install -r requirements.txt
+
+**Testing with pytest**
+
+- python -m pytest backend\tests

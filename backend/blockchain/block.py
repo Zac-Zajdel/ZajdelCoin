@@ -41,7 +41,7 @@ class Block:
     @staticmethod
     def mine_block(last_block, data):
         """
-        Mine a block based on the given last_block and data until Proof-Of-Work requirent is fulfilled
+        Mine a block based on the given last_block and data until Proof-Of-Work requirement is fulfilled
         """
         timestamp = time.time_ns()
         last_hash = last_block.hash
@@ -73,6 +73,40 @@ class Block:
         return 1
 
     @staticmethod
+    def is_valid_block(last_block, block):
+        """
+        Validate a block by enforcing the following rules:
+          1. The block must have the proper last_hash reference.
+          2. The block must meet the proof-of-work requirement.
+          3. The difficulty must only adjust by one.
+          4. The block hash must be a valid combination of the block fields.
+            - This will ensure authenticity that the block's data has not been tampered with. 
+            - last_hash MUST EQUAL current_block's for it to be valid and added to the chain.
+        """
+
+        if block.last_hash != last_block.hash:
+            raise Exception(
+                'The block last_hash does not equal the last_blocks hash value.')
+
+        if hex_to_binary(block.hash)[0:block.difficulty] != '0' * block.difficulty:
+            raise Exception('The proof-of-work requirement was not met.')
+
+        if abs(last_block.difficulty - block.difficulty) > 1:
+            raise Exception('Difficulty adjusted by more than one degree.')
+
+        reconstructed_hash = crypto_hash(
+            block.timestamp,
+            block.last_hash,
+            block.data,
+            block.nonce,
+            block.difficulty
+        )
+
+        if block.hash != reconstructed_hash:
+            raise Exception(
+                'The block hash must be correct. Data was corrupted/tampered')
+
+    @staticmethod
     def genesis():
         """
         Generate the genesis block.
@@ -82,8 +116,13 @@ class Block:
 
 def main():
     genesis_block = Block.genesis()
-    block = Block.mine_block(genesis_block, 'foo')
-    print(block)
+    bad_block = Block.mine_block(genesis_block, 'test_data')
+    bad_block.last_hash = 'wrong_data'
+
+    try:
+        Block.is_valid_block(genesis_block, bad_block)
+    except Exception as e:
+        print(f'is valid_block: {e}')
 
 
 if __name__ == '__main__':

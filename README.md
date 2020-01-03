@@ -10,10 +10,11 @@
 4. Connect ZajdelCoin and Blockchain
 5. Create Front-end with React, Redux
 6. Get real-time data about Bitcoin, Ethereum, etc... from API.
+7. Attempt to integrate into HOME repository.
 
-**Activate the virtual machine**
+**Activate the virtual machine inside blockchain-env\Scripts**
 
-- blockchain-env\Scripts\activate.bat
+- activate.bat
 
 **Executing a module**
 

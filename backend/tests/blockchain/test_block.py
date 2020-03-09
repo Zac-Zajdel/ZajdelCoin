@@ -45,6 +45,7 @@ def test_slowly_mined_block():
     assert mined_block.difficulty == last_block.difficulty - 1
 
 
+# This test ensures that the difficulty level never slips below 1 which would be catastrophic to the chain.
 def test_mined_block_difficulty_limits_at_1():
     last_block = Block(
         time.time_ns(),
@@ -71,6 +72,7 @@ def block(last_block):
     return Block.mine_block(last_block, 'test_data')
 
 
+# In Pytest, if a test doesn't raise an exception, it passes explicitly.
 def test_is_valid_block(last_block, block):
     Block.is_valid_block(last_block, block)
 

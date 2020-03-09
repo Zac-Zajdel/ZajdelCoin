@@ -3,6 +3,7 @@ from backend.util.crypto_hash import crypto_hash
 from backend.util.hex_to_binary import hex_to_binary
 from backend.config import MINE_RATE
 
+# Initial data used to start the blockchain
 GENESIS_DATA = {
     'timestamp': 1,
     'last_hash': 'genesis_last_hash',
@@ -37,6 +38,18 @@ class Block:
             f'difficulty: {self.difficulty}, '
             f'nonce: {self.nonce})'
         )
+
+    # Used to allow comparison on the items existing in two seperate instances.
+    def __eq__(self, other):
+      return self.__dict__ == other.__dict__
+
+    def to_json(self):
+        """
+        Serialize the block into a dictionary of its attributes.
+        """
+        return self.__dict__
+
+
 
     @staticmethod
     def mine_block(last_block, data):
@@ -116,6 +129,8 @@ class Block:
 
 def main():
     genesis_block = Block.genesis()
+
+    # Purposely messing up last hash to cause issue.
     bad_block = Block.mine_block(genesis_block, 'test_data')
     bad_block.last_hash = 'wrong_data'
 

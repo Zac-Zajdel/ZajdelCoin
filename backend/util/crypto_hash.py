@@ -13,6 +13,7 @@ def crypto_hash(*args):
 
 
 def main():
+    # Demonstrates that regardless of how many items added/position, the same hash value is created.
     print(f"crypto_hash: {crypto_hash('one', '2', [3])}")
     print(f"crypto_hash: {crypto_hash('one', [3], '2')}")
 

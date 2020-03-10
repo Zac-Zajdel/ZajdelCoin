@@ -19,6 +19,12 @@
 
 - python -m backend.app
 
+**Run a peer instance**
+
+```
+export PEER=True && python -m backend.app
+```
+
 **Executing a module**
 
 - python -m PATH.PATH.PATH....

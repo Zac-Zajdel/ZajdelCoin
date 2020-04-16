@@ -49,8 +49,6 @@ class Block:
         """
         return self.__dict__
 
-
-
     @staticmethod
     def mine_block(last_block, data):
         """

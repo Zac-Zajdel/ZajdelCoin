@@ -13,36 +13,36 @@ pubsub = PubSub(blockchain)
 
 @app.route('/')
 def route_default():
-    return 'Welcome to ZajdelCoin'
+  return 'Welcome to ZajdelCoin'
 
 @app.route('/blockchain')
 def route_blockchain():
-    return jsonify(blockchain.to_json())
+  return jsonify(blockchain.to_json())
 
 @app.route('/blockchain/mine')
 def route_blockchain_mine():
-    transaction_data = 'stubbed_transaction_data'
+  transaction_data = 'stubbed_transaction_data'
 
-    blockchain.add_block(transaction_data)
+  blockchain.add_block(transaction_data)
 
-    block = blockchain.chain[-1]
-    pubsub.broadcast_block(block)
+  block = blockchain.chain[-1]
+  pubsub.broadcast_block(block)
 
-    return jsonify(block.to_json())
+  return jsonify(block.to_json())
 
 ROOT_PORT = 5000
 PORT = ROOT_PORT
 
 if os.environ.get('PEER') == 'True':
-    PORT = random.randint(5001, 6000)
+  PORT = random.randint(5001, 6000)
 
-    result = requests.get(f'http://localhost:{ROOT_PORT}/blockchain')
-    result_blockchain = Blockchain.from_json(result.json())
+  result = requests.get(f'http://localhost:{ROOT_PORT}/blockchain')
+  result_blockchain = Blockchain.from_json(result.json())
 
-    try:
-        blockchain.replace_chain(result_blockchain.chain)
-        print('\n -- Successfully synchronized the local chain')
-    except Exception as e:
-        print(f'\n -- Error synchronizing: {e}')
+  try:
+    blockchain.replace_chain(result_blockchain.chain)
+    print('\n -- Successfully synchronized the local chain')
+  except Exception as e:
+    print(f'\n -- Error synchronizing: {e}')
 
 app.run(port=PORT)

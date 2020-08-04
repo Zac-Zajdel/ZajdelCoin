@@ -14,3 +14,12 @@ def test_verify_invalid_signature():
   signature = wallet.sign(data)
 
   assert not Wallet.verify(Wallet().public_key, data, signature)
+
+
+def test_tampered_data_signature():
+  data = { 'foo': 'test_data' }
+  wallet = Wallet()
+  signature = wallet.sign(data)
+  data = { 'bar': 'tampered_data' }
+
+  assert not Wallet.verify(wallet.public_key, data, signature)

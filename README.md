@@ -3,11 +3,9 @@
 ### ZajdelCoin is my personal attempt to gain an in-depth understanding of blockchain technology.
 
 ##### TODO:
-
-1. Allow For Transaction / Wallets / Keys
-2. Connect ZajdelCoin and Blockchain
-3. Create Front-end with React, Redux
-4. Get real-time data about Bitcoin, Ethereum, etc... from API.
+1. Connect ZajdelCoin and Blockchain
+2. Create Front-end with React, Redux
+3. Get real-time data about Bitcoin, Ethereum, etc... from API.
 
 **Activate the virtual machine:**
 

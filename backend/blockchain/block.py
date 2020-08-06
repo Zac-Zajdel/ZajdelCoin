@@ -12,8 +12,6 @@ GENESIS_DATA = {
   'difficulty': 3,
   'nonce': 'genesis_nonce'
 }
-
-
 class Block:
   """
   Block: unit of storage
@@ -60,7 +58,7 @@ class Block:
     nonce = 0
     hash = crypto_hash(timestamp, last_hash, data, difficulty, nonce)
 
-  # Perpetually loops until the leading zero's of hash equals the difficulty value.
+    # Perpetually loops until the leading zero's of hash equals the difficulty value.
     while hex_to_binary(hash)[0:difficulty] != '0' * difficulty:
       nonce += 1
       timestamp = time.time_ns()
